@@ -1,7 +1,7 @@
 import cv2
 import numpy as np
 
-input = cv2.imread('sample_image_4.jpg', cv2.IMREAD_GRAYSCALE)
+input = cv2.imread('sample_image.jpg', cv2.IMREAD_GRAYSCALE)
 input = cv2.resize(input, (1366, 768))
 aftrCnny = cv2.Canny(input, 100, 200)
 # cv2.imshow('canny', aftrCnny)
