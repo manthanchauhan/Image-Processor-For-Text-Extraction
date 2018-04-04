@@ -4,12 +4,8 @@ from PIL import Image
 import pytesseract
 
 def crop_It(input):
-    aftrCnny = cv2.Canny(input, 100, 160)
-    aftrdilat = cv2.dilate(aftrCnny, np.ones((5, 5), np.uint8), iterations=1)
-    aftrdilat = cv2.dilate(aftrdilat, np.ones((5, 5), np.uint8), iterations=1)
-
-    #finding boundary box of crop
-    im2, countours, heirarchy = cv2.findContours(aftrdilat, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
+    afterDilat = cv2.dilate(input, np.ones((5, 5), np.uint8),iterations=15)
+    im2, countours, heirarchy = cv2.findContours(afterDilat, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
     initx1 = 10e9
     inity1 = 10e9
     initx2 = -1
@@ -26,7 +22,7 @@ def crop_It(input):
             initx2 = x2
         if y2 > inity2:
             inity2 = y2
-    crop = input[inity1 - 5:inity2 + 5, initx1 - 5:initx2 + 5]
+    crop = input[inity1:inity2,initx1:initx2]
     return crop
 
 def binarize(crop):
@@ -35,9 +31,12 @@ def binarize(crop):
     output3 = cv2.adaptiveThreshold(crop, 255, cv2.ADAPTIVE_THRESH_MEAN_C, cv2.THRESH_BINARY_INV, 41, 2)
     output3 = cv2.erode(output3, np.ones((4, 4), np.uint8), iterations=1)
     output2 = cv2.bitwise_and(output3, output1)
+    # cv2.imshow('2', output2)
     output2 = cv2.dilate(output2, np.ones((8, 8), np.uint8), iterations=1)
     output2 = cv2.bitwise_not(output2)
     output2 = cv2.dilate(output2, np.ones((4, 4), np.uint8), iterations=1)
+    output2 = cv2.bitwise_not(output2)
+    # cv2.imshow('1', output1)
     return output2
 
 def printToFile(binary):
@@ -46,3 +45,17 @@ def printToFile(binary):
     string = text.encode('utf-8')
     with open('output.txt', 'w') as file:
         print(f"{string}", file=file)
+
+def removeTilt(binary):
+    textSpace = np.column_stack((np.where(binary > 0)))
+    angle = cv2.minAreaRect(textSpace)[-1]
+    if angle < -45:
+        angle = -(90 + angle)
+    else:
+        angle = - angle
+    # print(angle)
+    (h, w) = binary.shape[:2]
+    centre = (w // 2, h // 2)
+    M = cv2.getRotationMatrix2D(centre, angle, 1.0)
+    tiltCrrctd = cv2.warpAffine(binary, M, (w, h), flags=cv2.INTER_CUBIC, borderMode=cv2.BORDER_REPLICATE)
+    return tiltCrrctd
