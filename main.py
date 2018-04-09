@@ -1,11 +1,22 @@
 import functnDefinitions
 import cv2
 
-input = cv2.imread('sample_image.jpg', cv2.IMREAD_GRAYSCALE)
+input = cv2.imread('small.jpg', cv2.IMREAD_GRAYSCALE)
 binary = functnDefinitions.binarize(input)
 tiltCrrctd = functnDefinitions.removeTilt(binary)
+# tiltCrrctd = binary
 cropped = functnDefinitions.crop_It(tiltCrrctd)
-# cv2.imshow('binary', cropped)
+# cropped = tiltCrrctd
+Lines = functnDefinitions.getLines(cropped)
+(h, w) = cropped.shape[:2]
+totlLines = len(Lines)
+for i in range(0, totlLines, 2):
+    chars = functnDefinitions.getchars(cropped, Lines[i], Lines[i + 1])
+    for j in chars:
+        cv2.line(cropped, (j, Lines[i]), (j, Lines[i + 1]), (255, 255, 255), 2)
+for i in Lines:
+    cv2.line(cropped, (0, i), (w, i), (255, 255, 255), 2)
+cv2.imshow('binary', cropped)
 functnDefinitions.printToFile(cropped)
 cv2.waitKey(0)
 
