@@ -23,6 +23,7 @@ def crop_It(input):
         if y2 > inity2:
             inity2 = y2
     crop = input[inity1:inity2,initx1:initx2]
+    crop = cv2.erode(crop, np.ones((3, 3), np.uint8), iterations=1)
     return crop
 
 def binarize(crop):
@@ -48,14 +49,49 @@ def printToFile(binary):
 
 def removeTilt(binary):
     textSpace = np.column_stack((np.where(binary > 0)))
-    angle = cv2.minAreaRect(textSpace)[-1]
+    angle = cv2.minAreaRect(textSpace)[2]
     if angle < -45:
         angle = -(90 + angle)
     else:
         angle = - angle
     # print(angle)
     (h, w) = binary.shape[:2]
-    centre = (w // 2, h // 2)
+    centre = (w / 2, h / 2)
     M = cv2.getRotationMatrix2D(centre, angle, 1.0)
     tiltCrrctd = cv2.warpAffine(binary, M, (w, h), flags=cv2.INTER_CUBIC, borderMode=cv2.BORDER_REPLICATE)
     return tiltCrrctd
+
+def getLines(cropped):
+    lines = []
+    h = cropped.shape[0]
+    isline = False
+    for i in range(0, h):
+        segmntn = sum(cropped[i])
+        if segmntn == 0 and isline == True:
+            lines.append(i)
+            isline = False
+        if segmntn > 0 and isline == False:
+            lines.append(i)
+            isline = True
+    return lines
+
+def getchars(cropped, lwr, upr):
+    chars = []
+    w = cropped.shape[1]
+    ischar = False
+    for i in range(0, w):
+        segmntn = 0
+        for j in range(lwr + 1, upr):
+            segmntn = segmntn + cropped[j][i]
+        if segmntn <= 5 and ischar == True:
+            chars.append(i)
+            ischar = False
+        elif segmntn > 5 and ischar == False:
+            chars.append(i)
+            ischar = True
+    return chars
+
+
+
+
+
