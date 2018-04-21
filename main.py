@@ -1,7 +1,9 @@
 import functnDefinitions
 import cv2
+import sys
 
-input = cv2.imread('small.jpg', cv2.IMREAD_GRAYSCALE)
+inputFile = str(sys.argv[-1])
+input = cv2.imread(inputFile, cv2.IMREAD_GRAYSCALE)
 binary = functnDefinitions.binarize(input)
 tiltCrrctd = functnDefinitions.removeTilt(binary)
 # tiltCrrctd = binary
@@ -17,7 +19,7 @@ for i in range(0, totlLines, 2):
 for i in Lines:
     cv2.line(cropped, (0, i), (w, i), (255, 255, 255), 2)
 cv2.imshow('binary', cropped)
-functnDefinitions.printToFile(cropped)
+functnDefinitions.printToFile(tiltCrrctd)
 cv2.waitKey(0)
 
 
