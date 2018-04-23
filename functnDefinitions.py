@@ -1,7 +1,5 @@
 import cv2
 import numpy as np
-from PIL import Image
-import pytesseract
 
 def crop_It(input):
     afterDilat = cv2.dilate(input, np.ones((5, 5), np.uint8),iterations=15)
@@ -39,13 +37,6 @@ def binarize(crop):
     output2 = cv2.bitwise_not(output2)
     # cv2.imshow('1', output1)
     return output2
-
-def printToFile(binary):
-    image = Image.fromarray(binary)
-    text = pytesseract.image_to_string(image, lang='eng')
-    string = text.encode('utf-8')
-    with open('output.txt', 'w') as file:
-        print(f"{string}", file=file)
 
 def removeTilt(binary):
     textSpace = np.column_stack((np.where(binary > 0)))
