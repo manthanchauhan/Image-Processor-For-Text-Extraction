@@ -14,12 +14,11 @@ Lines = functnDefinitions.getLines(cropped)
 totlLines = len(Lines)
 for i in range(0, totlLines, 2):
     chars = functnDefinitions.getchars(cropped, Lines[i], Lines[i + 1])
-    for j in chars:
-        cv2.line(cropped, (j, Lines[i]), (j, Lines[i + 1]), (255, 255, 255), 2)
-for i in Lines:
-    cv2.line(cropped, (0, i), (w, i), (255, 255, 255), 2)
-cv2.imshow('binary', cropped)
-functnDefinitions.printToFile(tiltCrrctd)
+    totlChars = len(chars)
+    for j in range(0, totlChars, 2):
+        cv2.rectangle(cropped, (chars[j] - 2, Lines[i] - 5), (chars[j + 1] + 2, Lines[i + 1] + 2), (255, 255, 255), 2)
+cv2.imshow("text", cv2.resize(cropped,(1366, 768)))
 cv2.waitKey(0)
+cv2.destroyAllWindows()
 
 
