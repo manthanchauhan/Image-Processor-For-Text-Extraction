@@ -1,7 +1,7 @@
 # Image-Processor-For-Text-Extraction
 <b>Aim</b> : The Aim of the project is to develop a image processor whose output could be used by neural networks for text extraction from the input image.<br />
 <b>Input</b> : Image with single black text paragraph on white background as shown in [sample](sample_image.jpg)<br />
-<b>Output</b> : Bounding rectange of each charactor in the input. But for representation purpose the [output](output.jpg) is an binary image with every charactor highlighted by enclosing it in a white rectangle.<br /><br />
+<b>Output</b> : Bounding rectangle of each character in the input. But for representation purpose the [output](output.jpg) is an binary image with every character highlighted by enclosing it in a white rectangle.<br /><br />
 <b>Pre-requisites</b> :<br />
 	<b>Modules</b> - cv2, numpy and sys (<i>you can download these using [pip](https://packaging.python.org/tutorials/installing-packages/)</i>)<br />
 	<b>Python</b> - Basic syntax, functions :str(), len(), range(), sum() (<i>you can read about these functions [here](https://docs.python.org/3.4/library/functions.html)</i>) and [handling command line arguments in python](http://www.pythonforbeginners.com/argv/more-fun-with-sys-argv).<br />
@@ -13,9 +13,9 @@
 3)Cropped the image to minimize non-text region.<br />
 4)Removed any tilt from the text.<br />
 5)Determined the y-indices of the top and the bottom of each line of text (<i>line segmentation</i>).<br />
-6)In each line determined the x-indices of the beginning and the end of each charactor (<i>charactor segmentation</i>).<br />
-7)The bounding rectangle of each charactor is found by its x-indices and the y-indices of the line containing the charactor.<br />(<i>for complete working of the project you can refer to [docs](complete_docs)</i>)<br /><br />
-<b>Result</b> - The bounding rectangle of a each charactor could be fed to a neural network to covert the charctor from optical to text format.<br />
+6)In each line determined the x-indices of the beginning and the end of each character (<i>character segmentation</i>).<br />
+7)The bounding rectangle of each character is found by its x-indices and the y-indices of the line containing the character.<br />(<i>for complete working of the project you can refer to [docs](complete_docs)</i>)<br /><br />
+<b>Result</b> - The bounding rectangle of each character could be fed to a neural network to covert the charctor from optical to text format.<br />
 
  
 	
