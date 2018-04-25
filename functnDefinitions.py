@@ -3,7 +3,6 @@ import numpy as np
 
 def crop_It(input):
     afterDilat = cv2.dilate(input, np.ones((5, 5), np.uint8),iterations=15)
-    # cv2.imshow("afterdilat", cv2.resize(afterDilat, (1366, 768)))
     im2, countours, heirarchy = cv2.findContours(afterDilat, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
     initx1 = 10e9
     inity1 = 10e9
@@ -24,8 +23,6 @@ def crop_It(input):
         if y2 > inity2:
             inity2 = y2
     crop = input[inity1:inity2,initx1:initx2]
-    # cv2.imshow("cropped", cv2.resize(crop, (1366, 768)))
-    # crop = cv2.erode(crop, np.ones((3, 3), np.uint8), iterations=1)
     return crop
 
 def binarize(crop):
@@ -34,12 +31,6 @@ def binarize(crop):
     output3 = cv2.adaptiveThreshold(crop, 255, cv2.ADAPTIVE_THRESH_MEAN_C, cv2.THRESH_BINARY_INV, 41, 2)
     output3 = cv2.erode(output3, np.ones((4, 4), np.uint8), iterations=1)
     output2 = cv2.bitwise_and(output3, output1)
-    # cv2.imshow('1', cv2.resize(output1, (1366, 768)))
-    # cv2.imshow('1', output1)
-    # cv2.imshow('3', cv2.resize(output3, (1366, 768)))
-    # cv2.imshow('3', output3)
-    # cv2.imshow('2', cv2.resize(output2, (1366, 768)))
-    # cv2.imshow('2', output2)
     return output2
 
 def removeTilt(binary):
@@ -49,7 +40,6 @@ def removeTilt(binary):
         angle = -(90 + angle)
     else:
         angle = - angle
-    # print(angle)
     (h, w) = binary.shape[:2]
     centre = (w / 2, h / 2)
     M = cv2.getRotationMatrix2D(centre, angle, 1.0)
