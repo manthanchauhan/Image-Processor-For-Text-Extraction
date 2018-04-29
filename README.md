@@ -14,8 +14,10 @@
 4)Removed any tilt from the text.<br />
 5)Determined the y-indices of the top and the bottom of each line of text (<i>line segmentation</i>).<br />
 6)In each line determined the x-indices of the beginning and the end of each character (<i>character segmentation</i>).<br />
-7)The bounding rectangle of each character is found by its x-indices and the y-indices of the line containing the character.<br />(<i>for complete working of the project you can refer to [docs](complete_docs)</i>)<br /><br />
-<b>Result</b> - The bounding rectangle of each character could be fed to a neural network to covert the charctor from optical to text format.<br />
+7)The bounding rectangle of each character is found by its x-indices and the y-indices of the line containing the character.<br /><br />
+<b>Result</b> - The bounding rectangle of each character could be fed to a neural network to covert the charctor from optical to text format.<br /></ br>
+
+<b>Note</b> - People having the required knowledge of Neural Networks are most invited to work together on a complete optical charactor recognition system. Interested developers can contact manthanchauhan913@gmail.com.</ br>
 
  
 	
