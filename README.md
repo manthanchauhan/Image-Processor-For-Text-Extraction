@@ -13,7 +13,7 @@
 5)Determined the y-indices of the top and the bottom of each line of text (<i>line segmentation</i>).<br />
 6)In each line determined the x-indices of the beginning and the end of each character (<i>character segmentation</i>).<br />
 7)The bounding rectangle of each character is found by its x-indices and the y-indices of the line containing the character.<br /><br />
-<b>Note</b> - People having the required knowledge of Neural Networks are most invited to work together on a complete optical character recognition system. Interested developers can contact manthanchauhan913@gmail.com.<br /><br />
+<b>Note</b> - People having the required knowledge of Neural Networks are most invited to work together on a complete optical characte r recognition system. Interested developers can contact manthanchauhan913@gmail.com.<br /><br />
 To know complete working of the project the reader can refer [docs](complete_docs).<br />
 To use this project in any other project the reader can refer to [user mannual](user_mannual).<br />
 
