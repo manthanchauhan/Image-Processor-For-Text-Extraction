@@ -14,6 +14,6 @@ The first member of the list "sys.argv" is the name of the program itself follow
 Since only a single argument is passed, sys.argv[1] will be the input image in our case. As the function "cv2.imread()" needs string input, we use "str(cv2.imread())" as our input image name.<br />
 
 (<i>for example, now the program is invoked like [this](https://github.com/manthanchauhan/Image-Processor-For-Text-Extraction/blob/complete_doc/complete_docs/Screenshot%20(310).png)</i>)<br />
-This completes "Line 6" and "Line 7" of "main.py". 
+This completes "Line 6" and "Line 7" of "main.py". For any queries contact manthanchauhan913@gmail.com. 
 
   
