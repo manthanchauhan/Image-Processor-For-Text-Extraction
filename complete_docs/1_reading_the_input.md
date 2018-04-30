@@ -12,6 +12,6 @@ To use the command line arguments in python, <b>sys</b> module is needed (<i> yo
 A list of all command line arguments passed to the program is maintained by "sys". This list is named as "argv".<br />
 The first member of the list "sys.argv" is the name of the program itself followed by passed command line arguments passed.<br />
 Since only a single argument is passed, sys.argv[1] will be the input image in our case. As the function "cv2.imread()" needs string input, we use "str(cv2.imread())" as our input image name.<br />
-(<i>for example, the program is invoked like [this](Screenshot (310).png)</i>) 
+(<i>for example, the program is invoked like [this](complete_doc/Screenshot (310).png)</i>) 
 
   
